@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CalcWidget extends StatefulWidget {
-  CalcWidget({Key? key, this.title}) : super(key: key);
+  CalcWidget({Key key, this.title}) : super(key: key);
 
-  final String? title;
+  final String title;
 
   @override
   _CalcWidgetState createState() => _CalcWidgetState();
