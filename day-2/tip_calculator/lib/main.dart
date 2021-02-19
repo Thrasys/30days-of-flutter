@@ -6,21 +6,16 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Day-2',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CalcWidget(title: 'Pic-Calculator'),
+      home: CalcWidget(),
     );
   }
 }
