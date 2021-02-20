@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 250,
                     child: FlipCard(
                         // key: cardKey,
-                        flipOnTouch: false,
+                        // flipOnTouch: false,
                         front: FlashCardView(
                           text: _flashcards[_currentIndex].question,
                         ),
@@ -87,12 +87,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       OutlineButton.icon(
                         icon: Icon(Icons.chevron_left),
                         label: Text('Prev'),
-                        onPressed: showNextCard,
+                        onPressed: showPrevCard,
                       ),
                       OutlineButton.icon(
                         label: Text('Next'),
                         icon: Icon(Icons.chevron_right),
-                        onPressed: showPrevCard,
+                        onPressed: showNextCard,
                       ),
                     ],
                   ),
@@ -114,7 +114,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void showPrevCard() {
-    _currentIndex =
-        (_currentIndex - 1 >= 0) ? _currentIndex : _flashcards.length - 1;
+    setState(() {
+      _currentIndex =
+          (_currentIndex - 1 >= 0) ? _currentIndex - 1 : _flashcards.length - 1;
+    });
   }
 }
