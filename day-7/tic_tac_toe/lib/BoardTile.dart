@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/tile_state.dart';
 
@@ -7,22 +6,21 @@ class BoardTile extends StatelessWidget {
   final double dimension;
   final VoidCallback onPressed;
 
-  BoardTile({Key key, this.dimension, this.onPressed, this.tileState})
+  BoardTile({Key key, this.tileState, this.dimension, this.onPressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: dimension,
-      height: dimension,
-      child: FlatButton(
-        onPressed: onPressed,
-        child: Image.asset('images/x.png'),
-      ),
-    );
+        width: dimension,
+        height: dimension,
+        child: FlatButton(
+          onPressed: onPressed,
+          child: _widgetForTileState(),
+        ));
   }
 
-  Widget widgetForTileState() {
+  Widget _widgetForTileState() {
     Widget widget;
 
     switch (tileState) {
@@ -34,16 +32,17 @@ class BoardTile extends StatelessWidget {
 
       case TileState.CROSS:
         {
-          widget = Image.asset('image/x.png');
+          widget = Image.asset('images/x.png');
         }
         break;
 
       case TileState.CIRCLE:
         {
-          widget = Image.asset('image/o.png');
+          widget = Image.asset('images/o.png');
         }
         break;
     }
+
     return widget;
   }
 }
