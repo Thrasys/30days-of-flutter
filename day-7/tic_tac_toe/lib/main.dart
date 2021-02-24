@@ -16,38 +16,34 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final navigatorKey = GlobalKey<NavigatorState>();
   var _boardState = List.filled(9, TileState.EMPTY);
-
+  final globalKey = GlobalKey<ScaffoldState>();
   var _currentTurn = TileState.CROSS;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Stack(
-            children: [Image.asset('images/board.png'), _boardTiles()],
-          ),
-        ),
+        key: globalKey,
+        home: Scaffold(
+            body: Center(
+              child: Stack(
+                children: [Image.asset('images/board.png'), _boardTiles()],
+              ),
+            ),
 
-        ///////////////////////////////////////////////////////////
-        floatingActionButton: new MaterialButton(
-            highlightColor: Colors.lightBlueAccent,
-            highlightElevation: 8,
-            height: 50,
-            elevation: 12,
-            shape:
-                StadiumBorder(side: BorderSide(width: 2, color: Colors.purple)),
-            child: new Icon(Icons.autorenew),
-            color: Colors.blueAccent,
-            enableFeedback: true,
-            onPressed: () {
-              setState(() {
+            ///////////////////////////////////////////////////////////
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
                 return _refreshAction();
-              });
-            }),
-
-        ///////////////////////////////////////////////////////////
-      ),
-    );
+              },
+              child: Builder(
+                  builder: (context) => GestureDetector(
+                        onTap: () {
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text('Atualizando...'),
+                          ));
+                        },
+                        child: Icon(Icons.refresh_rounded),
+                      )),
+            )));
   }
 
   Widget _boardTiles() {
@@ -171,5 +167,10 @@ class _MyAppState extends State<MyApp> {
   _refreshAction() {
     Navigator.of(context).push(MaterialPageRoute(
         fullscreenDialog: true, builder: (context) => MyApp()));
+  }
+
+  _displaySnackBar(BuildContext context) {
+    final snackBar = SnackBar(content: Text('Are you talkin\' to me?'));
+    globalKey.currentState.showSnackBar(snackBar);
   }
 }
